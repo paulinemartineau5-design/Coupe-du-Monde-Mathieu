@@ -3,301 +3,1127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Road to World Cup 2026 - Mathieu</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<title>🏆 Coupe du Monde 2026 — Les matchs de Mathieu</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+  :root {
+    --gold: #F5C518;
+    --gold-dark: #c49b00;
+    --bg: #0d0f14;
+    --surface: #161922;
+    --surface2: #1e2330;
+    --border: rgba(255,255,255,0.08);
+    --text: #f0f0f0;
+    --muted: #8a93a6;
+    --watch: #f59e0b;
+    --together: #10b981;
+  }
 
-body{
-background:linear-gradient(135deg,#041C32,#04293A,#064663);
-min-height:100vh;
-color:white;
-padding:30px;
-}
+  html { scroll-behavior: smooth; }
 
-.container{
-max-width:1100px;
-margin:auto;
-}
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
 
-.hero{
-text-align:center;
-margin-bottom:40px;
-}
+  /* HERO */
+  .hero {
+    background: linear-gradient(180deg, #0a0c10 0%, #0d0f14 100%);
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(245,197,24,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .trophy-line {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .hero .subtitle strong {
+    color: var(--text);
+  }
+  .dates-badge {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 
-.hero h1{
-font-size:3rem;
-margin-bottom:10px;
-}
+  /* LEGEND / INSTRUCTIONS */
+  .instructions {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot.watch { background: var(--watch); }
+  .dot.together { background: var(--together); }
+  .dot.none { background: var(--surface2); border: 1px solid var(--border); }
 
-.hero p{
-opacity:.8;
-font-size:1.1rem;
-}
+  /* STICKY SUMMARY */
+  .sticky-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 15, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.82rem;
+  }
+  .stat-pill .count {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .stat-pill.watch-pill .count { color: var(--watch); }
+  .stat-pill.together-pill .count { color: var(--together); }
+  .btn-summary {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    border-radius: 100px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-summary:hover { opacity: 0.85; }
 
-.countdown{
-margin-top:20px;
-font-size:1.2rem;
-font-weight:600;
-}
+  /* MAIN CONTENT */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
 
-.card{
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(12px);
-padding:25px;
-border-radius:20px;
-margin-bottom:30px;
-box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
+  /* GROUP SECTIONS */
+  .group-section {
+    margin-bottom: 2.5rem;
+  }
+  .group-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .group-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    color: var(--gold);
+  }
+  .group-title {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .group-teams {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-left: auto;
+  }
 
-h2{
-margin-bottom:20px;
-}
+  /* MATCH CARD */
+  .match-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .match-card:hover {
+    background: var(--surface2);
+    border-color: rgba(255,255,255,0.15);
+  }
+  .match-card.selected-watch {
+    background: rgba(245,158,11,0.12);
+    border-color: rgba(245,158,11,0.45);
+  }
+  .match-card.selected-together {
+    background: rgba(16,185,129,0.12);
+    border-color: rgba(16,185,129,0.4);
+  }
 
-.match{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px;
-margin-bottom:10px;
-background:rgba(255,255,255,0.06);
-border-radius:12px;
-}
+  .match-date {
+    font-size: 0.72rem;
+    color: var(--muted);
+    min-width: 72px;
+    line-height: 1.4;
+  }
+  .match-date span {
+    display: block;
+    font-weight: 500;
+    color: var(--text);
+  }
 
-.match-info{
-display:flex;
-flex-direction:column;
-}
+  .match-teams {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .flag { font-size: 1.1rem; }
+  .vs {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 400;
+    padding: 0 0.2rem;
+  }
 
-.match label{
-cursor:pointer;
-}
+  .match-actions {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  .action-btn {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .action-btn:hover { opacity: 0.75; }
+  .action-btn.active-watch {
+    background: rgba(245,158,11,0.25);
+    border-color: var(--watch);
+  }
+  .action-btn.active-together {
+    background: rgba(16,185,129,0.25);
+    border-color: var(--together);
+  }
+  .btn-label {
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.2;
+    min-width: 34px;
+  }
+  .action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
 
-input[type="checkbox"]{
-transform:scale(1.4);
-cursor:pointer;
-}
+  /* PHASE DIVIDER */
+  .phase-divider {
+    text-align: center;
+    margin: 2.5rem 0 1.5rem;
+    position: relative;
+  }
+  .phase-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--border);
+  }
+  .phase-label {
+    position: relative;
+    background: var(--bg);
+    padding: 0 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
 
-button{
-background:#00C896;
-border:none;
-color:white;
-padding:15px 25px;
-font-size:1rem;
-border-radius:12px;
-cursor:pointer;
-font-weight:600;
-transition:.3s;
-}
+  /* SUMMARY MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 200;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 2rem;
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+  .modal-close {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+  }
+  .modal-section {
+    margin-bottom: 1.5rem;
+  }
+  .modal-section-title {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .modal-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .summary-match {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.4rem;
+    font-size: 0.88rem;
+  }
+  .summary-match.watch { background: rgba(245,158,11,0.12); }
+  .summary-match.together { background: rgba(16,185,129,0.12); }
+  .summary-date { color: var(--muted); font-size: 0.75rem; min-width: 80px; }
+  .summary-teams { flex: 1; font-weight: 500; }
 
-button:hover{
-transform:translateY(-2px);
-}
+  .modal-empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .print-note {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .btn-print {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    transition: background 0.15s;
+  }
+  .btn-print:hover { background: rgba(255,255,255,0.07); }
 
-#planning{
-margin-top:25px;
-}
-
-.planning-item{
-background:rgba(255,255,255,.07);
-padding:15px;
-border-radius:12px;
-margin-bottom:10px;
-}
-
-.footer{
-text-align:center;
-margin-top:40px;
-opacity:.7;
-}
-
-@media(max-width:700px){
-
-.hero h1{
-font-size:2rem;
-}
-
-.match{
-flex-direction:column;
-align-items:flex-start;
-gap:12px;
-}
-
-}
-
+  @media (max-width: 540px) {
+    .match-date { min-width: 56px; }
+    .match-teams { font-size: 0.8rem; }
+    .group-teams { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<div class="container">
-
 <div class="hero">
-<h1>⚽ Road to World Cup 2026</h1>
-<p>Planifie ton Mondial idéal, Mathieu.</p>
-
-<div class="countdown" id="countdown"></div>
+  <div class="trophy-line">🏆</div>
+  <h1>Coupe du Monde 2026</h1>
+  <p class="subtitle">Choisis les matchs que tu veux regarder, <strong>Mathieu</strong> !</p>
+  <div class="dates-badge">11 juin → 19 juillet 2026 · USA / Canada / Mexique</div>
 </div>
 
-<div class="card">
-
-<h2>Sélectionne les matchs que tu veux voir</h2>
-
-<div id="matches"></div>
-
-<br>
-
-<button onclick="generateSchedule()">
-Créer mon programme
-</button>
-
+<div class="instructions">
+  <div class="legend-item">
+    <div class="dot none"></div>
+    <span>Pas intéressé (défaut)</span>
+  </div>
+  <div class="legend-item">
+    <div class="dot watch"></div>
+    <span>Je regarde ⚽</span>
+  </div>
+  <div class="legend-item">
+    <div class="dot together"></div>
+    <span>Match important ensemble 💑</span>
+  </div>
 </div>
 
-<div class="card">
-
-<h2>Ton planning personnalisé</h2>
-
-<div id="planning">
-Choisis des matchs puis clique sur "Créer mon programme".
+<div class="sticky-bar">
+  <div class="stat-pill watch-pill">
+    <span class="count" id="count-watch">0</span>
+    <span>je regarde ⚽</span>
+  </div>
+  <div class="stat-pill together-pill">
+    <span class="count" id="count-together">0</span>
+    <span>ensemble 💑</span>
+  </div>
+  <button class="btn-summary" onclick="openSummary()">Voir le planning →</button>
 </div>
 
+<div class="container" id="matches-container">
+
+  <!-- PHASE DE GROUPES -->
+  <div class="phase-divider"><span class="phase-label">⚽ Phase de groupes</span></div>
+
+  <!-- GROUPE A -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe A</div>
+      <div class="group-teams">Mexique · Corée du Sud · Tchéquie · Afrique du Sud</div>
+    </div>
+    <div class="match-card" data-id="A1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>11 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🇲🇽</span> Mexique <span class="vs">vs</span> <span class="flag">🇿🇦</span> Afrique du Sud</div>
+      <div class="match-actions">
+        <div class="action-group">
+          <button class="action-btn" data-mode="watch" onclick="selectMode(event,'A1','watch')">⚽</button>
+          <div class="btn-label">Je regarde</div>
+        </div>
+        <div class="action-group">
+          <button class="action-btn" data-mode="together" onclick="selectMode(event,'A1','together')">💑</button>
+          <div class="btn-label">Ensemble !</div>
+        </div>
+      </div>
+    </div>
+    <div class="match-card" data-id="A2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>11 juin</span>04h (CET)</div>
+      <div class="match-teams"><span class="flag">🇰🇷</span> Corée du Sud <span class="vs">vs</span> <span class="flag">🇨🇿</span> Tchéquie</div>
+      <div class="match-actions">
+        <div class="action-group">
+          <button class="action-btn" data-mode="watch" onclick="selectMode(event,'A2','watch')">⚽</button>
+          <div class="btn-label">Je regarde</div>
+        </div>
+        <div class="action-group">
+          <button class="action-btn" data-mode="together" onclick="selectMode(event,'A2','together')">💑</button>
+          <div class="btn-label">Ensemble !</div>
+        </div>
+      </div>
+    </div>
+    <div class="match-card" data-id="A3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>18 juin</span>18h (CET)</div>
+      <div class="match-teams"><span class="flag">🇨🇿</span> Tchéquie <span class="vs">vs</span> <span class="flag">🇿🇦</span> Afrique du Sud</div>
+      <div class="match-actions">
+        <div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'A3','watch')">⚽</button><div class="btn-label">Je regarde</div></div>
+        <div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'A3','together')">💑</button><div class="btn-label">Ensemble !</div></div>
+      </div>
+    </div>
+    <div class="match-card" data-id="A4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>18 juin</span>03h (CET)</div>
+      <div class="match-teams"><span class="flag">🇲🇽</span> Mexique <span class="vs">vs</span> <span class="flag">🇰🇷</span> Corée du Sud</div>
+      <div class="match-actions">
+        <div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'A4','watch')">⚽</button><div class="btn-label">Je regarde</div></div>
+        <div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'A4','together')">💑</button><div class="btn-label">Ensemble !</div></div>
+      </div>
+    </div>
+    <div class="match-card" data-id="A5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>22 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇲🇽</span> Mexique <span class="vs">vs</span> <span class="flag">🇨🇿</span> Tchéquie</div>
+      <div class="match-actions">
+        <div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'A5','watch')">⚽</button><div class="btn-label">Je regarde</div></div>
+        <div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'A5','together')">💑</button><div class="btn-label">Ensemble !</div></div>
+      </div>
+    </div>
+    <div class="match-card" data-id="A6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>22 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇰🇷</span> Corée du Sud <span class="vs">vs</span> <span class="flag">🇿🇦</span> Afrique du Sud</div>
+      <div class="match-actions">
+        <div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'A6','watch')">⚽</button><div class="btn-label">Je regarde</div></div>
+        <div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'A6','together')">💑</button><div class="btn-label">Ensemble !</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUPE B -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe B</div>
+      <div class="group-teams">Canada · Qatar · Suisse · Bosnie</div>
+    </div>
+    <div class="match-card" data-id="B1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>12 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🇨🇦</span> Canada <span class="vs">vs</span> <span class="flag">🇧🇦</span> Bosnie-Herzégovine</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'B1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'B1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="B2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>13 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🇶🇦</span> Qatar <span class="vs">vs</span> <span class="flag">🇨🇭</span> Suisse</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'B2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'B2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="B3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>18 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🇨🇭</span> Suisse <span class="vs">vs</span> <span class="flag">🇧🇦</span> Bosnie-Herzégovine</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'B3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'B3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="B4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>18 juin</span>00h (CET)</div>
+      <div class="match-teams"><span class="flag">🇨🇦</span> Canada <span class="vs">vs</span> <span class="flag">🇶🇦</span> Qatar</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'B4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'B4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="B5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>22 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇨🇦</span> Canada <span class="vs">vs</span> <span class="flag">🇨🇭</span> Suisse</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'B5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'B5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="B6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>22 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇧🇦</span> Bosnie-Herzégovine <span class="vs">vs</span> <span class="flag">🇶🇦</span> Qatar</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'B6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'B6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE C -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe C</div>
+      <div class="group-teams">Brésil · Maroc · Haïti · Écosse</div>
+    </div>
+    <div class="match-card" data-id="C1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>13 juin</span>00h (CET)</div>
+      <div class="match-teams"><span class="flag">🇧🇷</span> Brésil <span class="vs">vs</span> <span class="flag">🇲🇦</span> Maroc</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'C1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'C1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="C2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>13 juin</span>03h (CET)</div>
+      <div class="match-teams"><span class="flag">🇭🇹</span> Haïti <span class="vs">vs</span> <span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> Écosse</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'C2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'C2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="C3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>19 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> Écosse <span class="vs">vs</span> <span class="flag">🇲🇦</span> Maroc</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'C3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'C3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="C4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>19 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇧🇷</span> Brésil <span class="vs">vs</span> <span class="flag">🇭🇹</span> Haïti</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'C4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'C4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="C5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>23 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇧🇷</span> Brésil <span class="vs">vs</span> <span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span> Écosse</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'C5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'C5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="C6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>23 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇲🇦</span> Maroc <span class="vs">vs</span> <span class="flag">🇭🇹</span> Haïti</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'C6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'C6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE D -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe D</div>
+      <div class="group-teams">USA · Paraguay · Australie · Turquie</div>
+    </div>
+    <div class="match-card" data-id="D1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>12 juin</span>03h (CET)</div>
+      <div class="match-teams"><span class="flag">🇺🇸</span> USA <span class="vs">vs</span> <span class="flag">🇵🇾</span> Paraguay</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'D1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'D1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="D2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>13 juin</span>06h (CET)</div>
+      <div class="match-teams"><span class="flag">🇦🇺</span> Australie <span class="vs">vs</span> <span class="flag">🇹🇷</span> Turquie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'D2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'D2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="D3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>19 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🇺🇸</span> USA <span class="vs">vs</span> <span class="flag">🇦🇺</span> Australie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'D3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'D3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="D4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>20 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇵🇾</span> Paraguay <span class="vs">vs</span> <span class="flag">🇹🇷</span> Turquie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'D4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'D4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="D5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇺🇸</span> USA <span class="vs">vs</span> <span class="flag">🇹🇷</span> Turquie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'D5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'D5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="D6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇦🇺</span> Australie <span class="vs">vs</span> <span class="flag">🇵🇾</span> Paraguay</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'D6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'D6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE E -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe E</div>
+      <div class="group-teams">Allemagne · Curaçao · Côte d'Ivoire · Équateur</div>
+    </div>
+    <div class="match-card" data-id="E1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>14 juin</span>19h (CET)</div>
+      <div class="match-teams"><span class="flag">🇩🇪</span> Allemagne <span class="vs">vs</span> <span class="flag">🇨🇼</span> Curaçao</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'E1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'E1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="E2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>14 juin</span>01h (CET)</div>
+      <div class="match-teams"><span class="flag">🇨🇮</span> Côte d'Ivoire <span class="vs">vs</span> <span class="flag">🇪🇨</span> Équateur</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'E2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'E2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="E3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>20 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇩🇪</span> Allemagne <span class="vs">vs</span> <span class="flag">🇨🇮</span> Côte d'Ivoire</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'E3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'E3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="E4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>20 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇨🇼</span> Curaçao <span class="vs">vs</span> <span class="flag">🇪🇨</span> Équateur</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'E4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'E4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="E5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇩🇪</span> Allemagne <span class="vs">vs</span> <span class="flag">🇪🇨</span> Équateur</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'E5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'E5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="E6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇨🇮</span> Côte d'Ivoire <span class="vs">vs</span> <span class="flag">🇨🇼</span> Curaçao</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'E6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'E6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE F -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe F</div>
+      <div class="group-teams">Pays-Bas · Japon · Tunisie · Suède</div>
+    </div>
+    <div class="match-card" data-id="F1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>14 juin</span>22h (CET)</div>
+      <div class="match-teams"><span class="flag">🇳🇱</span> Pays-Bas <span class="vs">vs</span> <span class="flag">🇯🇵</span> Japon</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'F1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'F1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="F2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>15 juin</span>04h (CET)</div>
+      <div class="match-teams"><span class="flag">🇹🇳</span> Tunisie <span class="vs">vs</span> <span class="flag">🇸🇪</span> Suède</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'F2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'F2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="F3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>21 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇳🇱</span> Pays-Bas <span class="vs">vs</span> <span class="flag">🇹🇳</span> Tunisie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'F3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'F3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="F4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>21 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇯🇵</span> Japon <span class="vs">vs</span> <span class="flag">🇸🇪</span> Suède</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'F4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'F4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="F5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>25 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇳🇱</span> Pays-Bas <span class="vs">vs</span> <span class="flag">🇸🇪</span> Suède</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'F5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'F5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="F6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>25 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇯🇵</span> Japon <span class="vs">vs</span> <span class="flag">🇹🇳</span> Tunisie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'F6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'F6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE G -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe G</div>
+      <div class="group-teams">Belgique · Égypte · Iran · Nouvelle-Zélande</div>
+    </div>
+    <div class="match-card" data-id="G1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>15 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🇧🇪</span> Belgique <span class="vs">vs</span> <span class="flag">🇪🇬</span> Égypte</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'G1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'G1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="G2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>16 juin</span>03h (CET)</div>
+      <div class="match-teams"><span class="flag">🇮🇷</span> Iran <span class="vs">vs</span> <span class="flag">🇳🇿</span> Nouvelle-Zélande</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'G2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'G2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="G3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>22 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇧🇪</span> Belgique <span class="vs">vs</span> <span class="flag">🇮🇷</span> Iran</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'G3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'G3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="G4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>22 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇪🇬</span> Égypte <span class="vs">vs</span> <span class="flag">🇳🇿</span> Nouvelle-Zélande</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'G4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'G4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="G5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>26 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇧🇪</span> Belgique <span class="vs">vs</span> <span class="flag">🇳🇿</span> Nouvelle-Zélande</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'G5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'G5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="G6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>26 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇮🇷</span> Iran <span class="vs">vs</span> <span class="flag">🇪🇬</span> Égypte</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'G6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'G6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE H -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe H</div>
+      <div class="group-teams">Espagne · Cap-Vert · Arabie Saoudite · Uruguay</div>
+    </div>
+    <div class="match-card" data-id="H1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>15 juin</span>18h (CET)</div>
+      <div class="match-teams"><span class="flag">🇪🇸</span> Espagne <span class="vs">vs</span> <span class="flag">🇨🇻</span> Cap-Vert</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'H1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'H1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="H2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>16 juin</span>00h (CET)</div>
+      <div class="match-teams"><span class="flag">🇸🇦</span> Arabie Saoudite <span class="vs">vs</span> <span class="flag">🇺🇾</span> Uruguay</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'H2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'H2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="H3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>21 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇪🇸</span> Espagne <span class="vs">vs</span> <span class="flag">🇸🇦</span> Arabie Saoudite</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'H3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'H3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="H4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>21 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇨🇻</span> Cap-Vert <span class="vs">vs</span> <span class="flag">🇺🇾</span> Uruguay</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'H4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'H4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="H5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>25 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇪🇸</span> Espagne <span class="vs">vs</span> <span class="flag">🇺🇾</span> Uruguay</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'H5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'H5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="H6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>25 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇨🇻</span> Cap-Vert <span class="vs">vs</span> <span class="flag">🇸🇦</span> Arabie Saoudite</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'H6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'H6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE I -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe I</div>
+      <div class="group-teams">France · Sénégal · Irak · Norvège</div>
+    </div>
+    <div class="match-card" data-id="I1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>16 juin</span>21h (CET)</div>
+      <div class="match-teams"><span class="flag">🇫🇷</span> France <span class="vs">vs</span> <span class="flag">🇸🇳</span> Sénégal</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'I1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'I1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="I2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>17 juin</span>00h (CET)</div>
+      <div class="match-teams"><span class="flag">🇮🇶</span> Irak <span class="vs">vs</span> <span class="flag">🇳🇴</span> Norvège</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'I2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'I2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="I3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>23 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇫🇷</span> France <span class="vs">vs</span> <span class="flag">🇮🇶</span> Irak</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'I3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'I3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="I4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>23 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇸🇳</span> Sénégal <span class="vs">vs</span> <span class="flag">🇳🇴</span> Norvège</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'I4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'I4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="I5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>27 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇫🇷</span> France <span class="vs">vs</span> <span class="flag">🇳🇴</span> Norvège</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'I5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'I5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="I6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>27 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇸🇳</span> Sénégal <span class="vs">vs</span> <span class="flag">🇮🇶</span> Irak</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'I6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'I6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE J -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe J</div>
+      <div class="group-teams">Argentine · Algérie · Autriche · Jordanie</div>
+    </div>
+    <div class="match-card" data-id="J1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>17 juin</span>03h (CET)</div>
+      <div class="match-teams"><span class="flag">🇦🇷</span> Argentine <span class="vs">vs</span> <span class="flag">🇩🇿</span> Algérie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'J1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'J1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="J2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>17 juin</span>06h (CET)</div>
+      <div class="match-teams"><span class="flag">🇦🇹</span> Autriche <span class="vs">vs</span> <span class="flag">🇯🇴</span> Jordanie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'J2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'J2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="J3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>23 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇦🇷</span> Argentine <span class="vs">vs</span> <span class="flag">🇦🇹</span> Autriche</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'J3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'J3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="J4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>23 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇩🇿</span> Algérie <span class="vs">vs</span> <span class="flag">🇯🇴</span> Jordanie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'J4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'J4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="J5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>27 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇦🇷</span> Argentine <span class="vs">vs</span> <span class="flag">🇯🇴</span> Jordanie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'J5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'J5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="J6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>27 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇦🇹</span> Autriche <span class="vs">vs</span> <span class="flag">🇩🇿</span> Algérie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'J6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'J6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE K -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe K</div>
+      <div class="group-teams">Portugal · Congo DR · Ouzbékistan · Colombie</div>
+    </div>
+    <div class="match-card" data-id="K1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>17 juin</span>19h (CET)</div>
+      <div class="match-teams"><span class="flag">🇵🇹</span> Portugal <span class="vs">vs</span> <span class="flag">🇨🇩</span> Congo DR</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'K1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'K1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="K2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>18 juin</span>04h (CET)</div>
+      <div class="match-teams"><span class="flag">🇺🇿</span> Ouzbékistan <span class="vs">vs</span> <span class="flag">🇨🇴</span> Colombie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'K2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'K2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="K3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇵🇹</span> Portugal <span class="vs">vs</span> <span class="flag">🇺🇿</span> Ouzbékistan</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'K3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'K3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="K4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇨🇩</span> Congo DR <span class="vs">vs</span> <span class="flag">🇨🇴</span> Colombie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'K4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'K4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="K5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>28 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇵🇹</span> Portugal <span class="vs">vs</span> <span class="flag">🇨🇴</span> Colombie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'K5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'K5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="K6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>28 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇺🇿</span> Ouzbékistan <span class="vs">vs</span> <span class="flag">🇨🇩</span> Congo DR</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'K6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'K6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- GROUPE L -->
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Groupe L</div>
+      <div class="group-teams">Angleterre · Croatie · Ghana · Panama</div>
+    </div>
+    <div class="match-card" data-id="L1" onclick="toggleMatch(this)">
+      <div class="match-date"><span>17 juin</span>22h (CET)</div>
+      <div class="match-teams"><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> Angleterre <span class="vs">vs</span> <span class="flag">🇭🇷</span> Croatie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'L1','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'L1','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="L2" onclick="toggleMatch(this)">
+      <div class="match-date"><span>18 juin</span>01h (CET)</div>
+      <div class="match-teams"><span class="flag">🇬🇭</span> Ghana <span class="vs">vs</span> <span class="flag">🇵🇦</span> Panama</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'L2','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'L2','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="L3" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> Angleterre <span class="vs">vs</span> <span class="flag">🇬🇭</span> Ghana</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'L3','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'L3','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="L4" onclick="toggleMatch(this)">
+      <div class="match-date"><span>24 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇭🇷</span> Croatie <span class="vs">vs</span> <span class="flag">🇵🇦</span> Panama</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'L4','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'L4','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="L5" onclick="toggleMatch(this)">
+      <div class="match-date"><span>28 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span> Angleterre <span class="vs">vs</span> <span class="flag">🇵🇦</span> Panama</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'L5','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'L5','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="L6" onclick="toggleMatch(this)">
+      <div class="match-date"><span>28 juin</span>TBD</div>
+      <div class="match-teams"><span class="flag">🇬🇭</span> Ghana <span class="vs">vs</span> <span class="flag">🇭🇷</span> Croatie</div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'L6','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'L6','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <!-- PHASES ÉLIMINATOIRES -->
+  <div class="phase-divider"><span class="phase-label">⚡ Phase éliminatoire</span></div>
+
+  <div class="group-section">
+    <div class="group-header">
+      <div class="group-badge">Huitièmes</div>
+      <div class="group-title">1 juillet – 6 juillet</div>
+    </div>
+    <div class="match-card" data-id="R32" onclick="toggleMatch(this)">
+      <div class="match-date"><span>1–6 juil.</span>Huitièmes</div>
+      <div class="match-teams">🏟️ <span style="color:var(--muted);font-weight:400">À suivre selon les qualifiés...</span></div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'R32','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'R32','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="QF" onclick="toggleMatch(this)">
+      <div class="match-date"><span>4–8 juil.</span>Quarts de finale</div>
+      <div class="match-teams">🏟️ <span style="color:var(--muted);font-weight:400">Les 8 meilleures équipes</span></div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'QF','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'QF','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="SF" onclick="toggleMatch(this)">
+      <div class="match-date"><span>14–15 juil.</span>Demi-finales</div>
+      <div class="match-teams">🏟️ <span style="color:var(--muted);font-weight:400">Dallas & Atlanta</span></div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'SF','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'SF','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+    <div class="match-card" data-id="FINAL" onclick="toggleMatch(this)">
+      <div class="match-date"><span>19 juil.</span>FINALE 🏆</div>
+      <div class="match-teams">🌟 <span style="font-weight:600;color:var(--gold)">La grande finale — New York/New Jersey</span></div>
+      <div class="match-actions"><div class="action-group"><button class="action-btn" data-mode="watch" onclick="selectMode(event,'FINAL','watch')">⚽</button><div class="btn-label">Je regarde</div></div><div class="action-group"><button class="action-btn" data-mode="together" onclick="selectMode(event,'FINAL','together')">💑</button><div class="btn-label">Ensemble !</div></div></div>
+    </div>
+  </div>
+
+  <div style="height: 3rem;"></div>
 </div>
 
-<div class="footer">
-Créé spécialement pour Mathieu ❤️
-</div>
+<!-- MODAL PLANNING -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🗓️ Notre planning foot</div>
+      <button class="modal-close" onclick="closeSummary()">Fermer</button>
+    </div>
 
+    <div class="modal-section" id="together-section">
+      <div class="modal-section-title">💑 Matchs importants ensemble</div>
+      <div id="together-list"></div>
+    </div>
+
+    <div class="modal-section" id="watch-section">
+      <div class="modal-section-title">⚽ Je regarde (Mathieu)</div>
+      <div id="watch-list"></div>
+    </div>
+
+    <div class="modal-empty" id="modal-empty" style="display:none">
+      Aucun match sélectionné pour l'instant 😊<br>Coche des matchs en haut pour les voir ici !
+    </div>
+
+    <div class="print-note">
+      💡 Fais une capture d'écran pour garder ton planning !
+      <br><button class="btn-print" onclick="window.print()">🖨️ Imprimer / PDF</button>
+    </div>
+  </div>
 </div>
 
 <script>
+const selections = {};
 
-const matches = [
-
-{
-team:"Match d'ouverture",
-date:"11 juin 2026",
-city:"Mexico City"
-},
-
-{
-team:"France - Match de groupe",
-date:"13 juin 2026",
-city:"À confirmer"
-},
-
-{
-team:"France - Match de groupe",
-date:"18 juin 2026",
-city:"À confirmer"
-},
-
-{
-team:"France - Match de groupe",
-date:"23 juin 2026",
-city:"À confirmer"
-},
-
-{
-team:"Huitième de finale",
-date:"28 juin 2026",
-city:"Dallas"
-},
-
-{
-team:"Quart de finale",
-date:"4 juillet 2026",
-city:"Los Angeles"
-},
-
-{
-team:"Demi-finale",
-date:"14 juillet 2026",
-city:"Atlanta"
-},
-
-{
-team:"Finale",
-date:"19 juillet 2026",
-city:"New York"
+function getCard(id) {
+  return document.querySelector(`.match-card[data-id="${id}"]`);
+}
+function getBtn(id, mode) {
+  const card = getCard(id);
+  return card ? card.querySelector(`.action-btn[data-mode="${mode}"]`) : null;
 }
 
-];
+function selectMode(e, id, mode) {
+  e.stopPropagation();
+  const current = selections[id];
+  if (current === mode) {
+    delete selections[id];
+  } else {
+    selections[id] = mode;
+  }
+  updateCard(id);
+  updateCounts();
+}
 
-const container = document.getElementById("matches");
+function toggleMatch(card) {
+  const id = card.dataset.id;
+  const current = selections[id];
+  if (!current) {
+    selections[id] = 'watch';
+  } else if (current === 'watch') {
+    selections[id] = 'together';
+  } else {
+    delete selections[id];
+  }
+  updateCard(id);
+  updateCounts();
+}
 
-matches.forEach((match,index)=>{
+function updateCard(id) {
+  const card = getCard(id);
+  const watchBtnEl = getBtn(id, 'watch');
+  const togetherBtnEl = getBtn(id, 'together');
+  if (!card) return;
 
-container.innerHTML += `
-<div class="match">
+  card.classList.remove('selected-watch','selected-together');
+  watchBtnEl && watchBtnEl.classList.remove('active-watch','active-together');
+  togetherBtnEl && togetherBtnEl.classList.remove('active-watch','active-together');
 
-<div class="match-info">
-<strong>${match.team}</strong>
-<span>${match.date}</span>
-<span>${match.city}</span>
-</div>
+  const mode = selections[id];
+  if (mode === 'watch') {
+    card.classList.add('selected-watch');
+    watchBtnEl && watchBtnEl.classList.add('active-watch');
+  } else if (mode === 'together') {
+    card.classList.add('selected-together');
+    togetherBtnEl && togetherBtnEl.classList.add('active-together');
+  }
+}
 
-<input type="checkbox" id="match${index}">
+function updateCounts() {
+  const watchCount = Object.values(selections).filter(v => v === 'watch').length;
+  const togetherCount = Object.values(selections).filter(v => v === 'together').length;
+  document.getElementById('count-watch').textContent = watchCount;
+  document.getElementById('count-together').textContent = togetherCount;
+}
 
-</div>
-`;
+function getMatchLabel(id) {
+  const card = getCard(id);
+  if (!card) return { date: id, teams: id };
+  const dateEl = card.querySelector('.match-date');
+  const teamsEl = card.querySelector('.match-teams');
+  const dateText = dateEl ? dateEl.querySelector('span').textContent : '';
+  let teamsText = '';
+  if (teamsEl) {
+    teamsText = teamsEl.innerText.replace(/\s+/g,' ').trim();
+  }
+  return { date: dateText, teams: teamsText };
+}
 
+function openSummary() {
+  const watchIds = Object.keys(selections).filter(k => selections[k] === 'watch');
+  const togetherIds = Object.keys(selections).filter(k => selections[k] === 'together');
+
+  const togetherList = document.getElementById('together-list');
+  const watchList = document.getElementById('watch-list');
+  const empty = document.getElementById('modal-empty');
+  const togetherSection = document.getElementById('together-section');
+  const watchSection = document.getElementById('watch-section');
+
+  togetherList.innerHTML = '';
+  watchList.innerHTML = '';
+
+  if (togetherIds.length === 0 && watchIds.length === 0) {
+    togetherSection.style.display = 'none';
+    watchSection.style.display = 'none';
+    empty.style.display = 'block';
+  } else {
+    empty.style.display = 'none';
+    togetherSection.style.display = togetherIds.length ? 'block' : 'none';
+    watchSection.style.display = watchIds.length ? 'block' : 'none';
+
+    togetherIds.forEach(id => {
+      const info = getMatchLabel(id);
+      togetherList.innerHTML += `<div class="summary-match together"><span class="summary-date">${info.date}</span><span class="summary-teams">${info.teams}</span></div>`;
+    });
+    watchIds.forEach(id => {
+      const info = getMatchLabel(id);
+      watchList.innerHTML += `<div class="summary-match watch"><span class="summary-date">${info.date}</span><span class="summary-teams">${info.teams}</span></div>`;
+    });
+  }
+
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeSummary() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeSummary();
 });
-
-function generateSchedule(){
-
-const planning = document.getElementById("planning");
-
-let html = "";
-
-matches.forEach((match,index)=>{
-
-if(document.getElementById(`match${index}`).checked){
-
-html += `
-<div class="planning-item">
-<strong>${match.team}</strong><br>
-📅 ${match.date}<br>
-📍 ${match.city}
-</div>
-`;
-
-}
-
-});
-
-if(html===""){
-html="Aucun match sélectionné.";
-}
-
-planning.innerHTML = html;
-
-}
-
-function updateCountdown(){
-
-const targetDate = new Date("June 11, 2026 00:00:00");
-
-const now = new Date();
-
-const diff = targetDate - now;
-
-const days = Math.floor(diff/(1000*60*60*24));
-
-document.getElementById("countdown").innerHTML =
-`🏆 Plus que ${days} jours avant le début du Mondial`;
-
-}
-
-updateCountdown();
-
 </script>
-
 </body>
 </html>
