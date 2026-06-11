@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Road to World Cup 2026 - Mathieu</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#041C32,#04293A,#064663);
+min-height:100vh;
+color:white;
+padding:30px;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+.hero{
+text-align:center;
+margin-bottom:40px;
+}
+
+.hero h1{
+font-size:3rem;
+margin-bottom:10px;
+}
+
+.hero p{
+opacity:.8;
+font-size:1.1rem;
+}
+
+.countdown{
+margin-top:20px;
+font-size:1.2rem;
+font-weight:600;
+}
+
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+padding:25px;
+border-radius:20px;
+margin-bottom:30px;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+h2{
+margin-bottom:20px;
+}
+
+.match{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+margin-bottom:10px;
+background:rgba(255,255,255,0.06);
+border-radius:12px;
+}
+
+.match-info{
+display:flex;
+flex-direction:column;
+}
+
+.match label{
+cursor:pointer;
+}
+
+input[type="checkbox"]{
+transform:scale(1.4);
+cursor:pointer;
+}
+
+button{
+background:#00C896;
+border:none;
+color:white;
+padding:15px 25px;
+font-size:1rem;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
+
+#planning{
+margin-top:25px;
+}
+
+.planning-item{
+background:rgba(255,255,255,.07);
+padding:15px;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+.footer{
+text-align:center;
+margin-top:40px;
+opacity:.7;
+}
+
+@media(max-width:700px){
+
+.hero h1{
+font-size:2rem;
+}
+
+.match{
+flex-direction:column;
+align-items:flex-start;
+gap:12px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="hero">
+<h1>⚽ Road to World Cup 2026</h1>
+<p>Planifie ton Mondial idéal, Mathieu.</p>
+
+<div class="countdown" id="countdown"></div>
+</div>
+
+<div class="card">
+
+<h2>Sélectionne les matchs que tu veux voir</h2>
+
+<div id="matches"></div>
+
+<br>
+
+<button onclick="generateSchedule()">
+Créer mon programme
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Ton planning personnalisé</h2>
+
+<div id="planning">
+Choisis des matchs puis clique sur "Créer mon programme".
+</div>
+
+</div>
+
+<div class="footer">
+Créé spécialement pour Mathieu ❤️
+</div>
+
+</div>
+
+<script>
+
+const matches = [
+
+{
+team:"Match d'ouverture",
+date:"11 juin 2026",
+city:"Mexico City"
+},
+
+{
+team:"France - Match de groupe",
+date:"13 juin 2026",
+city:"À confirmer"
+},
+
+{
+team:"France - Match de groupe",
+date:"18 juin 2026",
+city:"À confirmer"
+},
+
+{
+team:"France - Match de groupe",
+date:"23 juin 2026",
+city:"À confirmer"
+},
+
+{
+team:"Huitième de finale",
+date:"28 juin 2026",
+city:"Dallas"
+},
+
+{
+team:"Quart de finale",
+date:"4 juillet 2026",
+city:"Los Angeles"
+},
+
+{
+team:"Demi-finale",
+date:"14 juillet 2026",
+city:"Atlanta"
+},
+
+{
+team:"Finale",
+date:"19 juillet 2026",
+city:"New York"
+}
+
+];
+
+const container = document.getElementById("matches");
+
+matches.forEach((match,index)=>{
+
+container.innerHTML += `
+<div class="match">
+
+<div class="match-info">
+<strong>${match.team}</strong>
+<span>${match.date}</span>
+<span>${match.city}</span>
+</div>
+
+<input type="checkbox" id="match${index}">
+
+</div>
+`;
+
+});
+
+function generateSchedule(){
+
+const planning = document.getElementById("planning");
+
+let html = "";
+
+matches.forEach((match,index)=>{
+
+if(document.getElementById(`match${index}`).checked){
+
+html += `
+<div class="planning-item">
+<strong>${match.team}</strong><br>
+📅 ${match.date}<br>
+📍 ${match.city}
+</div>
+`;
+
+}
+
+});
+
+if(html===""){
+html="Aucun match sélectionné.";
+}
+
+planning.innerHTML = html;
+
+}
+
+function updateCountdown(){
+
+const targetDate = new Date("June 11, 2026 00:00:00");
+
+const now = new Date();
+
+const diff = targetDate - now;
+
+const days = Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("countdown").innerHTML =
+`🏆 Plus que ${days} jours avant le début du Mondial`;
+
+}
+
+updateCountdown();
+
+</script>
+
+</body>
+</html>
